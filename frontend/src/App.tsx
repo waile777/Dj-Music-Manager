@@ -1,16 +1,31 @@
 import React from "react";
-import logo from "./assets/djmm-pro-logo.png";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import logo from "./assets/djmm-pro-logo.png";
+import { Routes, Route } from "react-router-dom";
 import Login from "./pages/login";
 import Home from "./pages/Home";
-
+import GuestRoute from "./GuestRoute";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   return (
     <div className="app-container" >
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <GuestRoute>
+              <Login />
+            </GuestRoute>
+          }
+        />
       </Routes>
     </div>
 

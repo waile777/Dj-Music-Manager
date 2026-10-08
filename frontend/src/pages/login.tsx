@@ -2,29 +2,36 @@ import React, { useState } from "react";
 import api from "../api";
 import logo from "../assets/djmm-pro-logo.png";
 import { User, Eye, EyeOff, Contact, Lock } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
+
+
 
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
 
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {
+
             const response = await api.post("/login", {
                 email,
                 password,
             });
 
             console.log(response.data);
+            navigate("/");
         } catch (error) {
             console.log(error);
         }
     };
 
     return (
-        <div className="flex flex-col w-[100%] items-center ">
+        <div className="flex flex-col w-[100%] items-center gap-30">
             <header className="flex w-[100%] px-5 py-1 justify-between bg-[#1A1C1F] border-b border-[#3B3B3B] ">
                 <div className="flex flex-col gap-[1px] items-left">
                     <img src={logo} className="w-25" alt="logo" />
@@ -44,7 +51,7 @@ function Login() {
             {/* Form */}
             <form onSubmit={handleLogin}
                 autoComplete="off"
-                className="flex flex-col gap-4 bg-[#1A1C1F] p-1 rounded-[20px] w-[50%] p-7">
+                className="flex flex-col gap-4 bg-[#1A1C1F] p-1 rounded-[20px] w-[35%] p-7">
                 <div className="flex gap-2 items-center justify-center mt-4">
                     <img
                         className="w-[200px]"
